@@ -25,6 +25,7 @@ threshold, it will start to punish the players by:
 ## Configuration
 ```yaml
 worlds:
+  // specify name of the world here, you must restart server to either add or remove worlds from the config
   world:
     // number of chunks generated before the player is punished
     punishThreshold: 800
