@@ -1,0 +1,10 @@
+name: TooManyGen
+version: '${project.version}'
+main: fun.milkyway.toomanygen.TooManyGen
+api-version: 1.19
+description: Limits players ability to generate chunks
+commands:
+  toomanygen:
+    description: Core command for TooManyGen plugin.
+    permission: toomanygen.command
+    aliases: ['tmg']

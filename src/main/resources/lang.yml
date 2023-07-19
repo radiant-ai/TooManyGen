@@ -1,0 +1,7 @@
+command:
+  reload:
+    success: '<green>Config reloaded!'
+chunkGeneration:
+  limitReached: '<#FFEA7E>Elytra damage multiplier: '
+  multiplier: '<gold>x{0}'
+  vanishWarning: '<#FF0000>will vanish'
