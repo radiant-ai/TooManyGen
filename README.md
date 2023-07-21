@@ -72,3 +72,6 @@ worlds:
 
 ## Commands
 - `/toomanygen reload` - reload the config, not recommended to use in production
+
+## Download
+- [Modrinth](https://modrinth.com/plugin/toomanygen)
