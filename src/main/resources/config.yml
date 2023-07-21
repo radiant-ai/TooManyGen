@@ -1,6 +1,9 @@
+do_not_touch_config_version: 1
+bStats: true
 worlds:
-  world:
-    punishThreshold: 800
+  default:
+    enabled: true
+    punishThreshold: 600
     chunkGenDistance: 32
     coolingRate: 16
     coolingSpeedup: 1.25

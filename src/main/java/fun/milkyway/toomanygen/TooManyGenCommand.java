@@ -16,7 +16,7 @@ public class TooManyGenCommand implements CommandExecutor {
         }
         switch (args[0].toLowerCase()) {
             case "reload" -> {
-                ConfigurationManager.getInstance().loadConfiguration();
+                TooManyGen.getInstance().onReload();
                 sender.sendMessage(LangManager.getInstance().getComponent("command.reload.success"));
             }
             default -> {

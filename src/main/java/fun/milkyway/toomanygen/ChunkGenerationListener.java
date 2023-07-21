@@ -30,11 +30,25 @@ public class ChunkGenerationListener implements Listener {
     private final BukkitTask cooldownTask;
 
     public ChunkGenerationListener(World world) {
+        TooManyGen.getInstance().getLogger().info("Initializing listener for world " + world.getName());
         this.rates = new HashMap<>();
         this.bossBars = new HashMap<>();
         this.lastViewDistanceUpdate = new HashMap<>();
         this.world = world;
         cooldownTask = coolDownTask();
+    }
+
+    public void shutdown() {
+        TooManyGen.getInstance().getLogger().info("Shutting down listener for world " + world.getName());
+        cooldownTask.cancel();
+        for (var bossBar : bossBars.entrySet()) {
+            var player = TooManyGen.getInstance().getServer().getPlayer(bossBar.getKey());
+            if (player == null) {
+                continue;
+            }
+            player.hideBossBar(bossBar.getValue());
+        }
+        world.getPlayers().forEach(player -> player.setViewDistance(world.getViewDistance()));
     }
 
     private BukkitTask coolDownTask() {
@@ -244,7 +258,7 @@ public class ChunkGenerationListener implements Listener {
     }
 
     private int getViewDistance(int rate) {
-        var threshold = getLocalConfiguration().getInt("punishThreshold", 400);
+        var threshold = getLocalConfiguration().getInt("punishThreshold");
         var viewDistances = getLocalConfiguration().getIntegerList("viewDistanceValues");
         var thresholds = getLocalConfiguration().getDoubleList("viewDistanceThresholds");
         var viewDistance = 32;

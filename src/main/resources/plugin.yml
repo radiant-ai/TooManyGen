@@ -3,6 +3,7 @@ version: '${project.version}'
 main: fun.milkyway.toomanygen.TooManyGen
 api-version: 1.19
 description: Limits players ability to generate chunks
+author: radiant-ai
 commands:
   toomanygen:
     description: Core command for TooManyGen plugin.

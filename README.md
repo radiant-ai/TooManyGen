@@ -24,11 +24,18 @@ threshold, it will start to punish the players by:
 
 ## Configuration
 ```yaml
+// do not touch
+do_not_touch_config_version: 1
+// whether to enable bStats statisics
+bStats: true
 worlds:
-  // specify name of the world here, you must restart server to either add or remove worlds from the config
-  world:
+  // default settings for all worlds, you can specify per world settings by
+  // creating a config section with the world name
+  default:
+    // whether to enable features for the world
+    enabled: true
     // number of chunks generated before the player is punished
-    punishThreshold: 800
+    punishThreshold: 600
     // max distance at which we consider chunk generation
     chunkGenDistance: 32
     // the rate of cooling down the number of chunks, this is twice per second
@@ -64,4 +71,4 @@ worlds:
 - `toomanygen.command.reload` - use reload command
 
 ## Commands
-- `/toomanygen reload` - reload the config
+- `/toomanygen reload` - reload the config, not recommended to use in production

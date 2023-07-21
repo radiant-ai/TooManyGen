@@ -1,5 +1,6 @@
 package fun.milkyway.toomanygen;
 
+import org.bukkit.World;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -27,12 +28,9 @@ public class ConfigurationManager {
         return instance;
     }
 
-    public Collection<String> getWorlds() {
-        var worldsSection = configuration.getConfigurationSection("worlds");
-        if (worldsSection == null) {
-            return List.of();
-        }
-        return worldsSection.getKeys(false);
+    public List<String> getActiveWorlds() {
+        return TooManyGen.getInstance().getServer().getWorlds().stream().map(World::getName).filter(
+                world -> configuration.getBoolean("worlds." + world + ".enabled")).toList();
     }
 
     public void loadConfiguration() {
@@ -45,6 +43,8 @@ public class ConfigurationManager {
         try {
             configuration = loadDefaultConfig(configFile, "config.yml");
             langConfiguration = loadDefaultConfig(langFile, "lang.yml");
+
+            applyDefaultsToWorlds();
         } catch (IOException e) {
             TooManyGen.getInstance().getLogger().log(Level.SEVERE, "Could not load configuration", e);
         }
@@ -63,6 +63,12 @@ public class ConfigurationManager {
         configuration.save(configFile);
 
         return configuration;
+    }
+
+    private void applyDefaultsToWorlds() {
+        TooManyGen.getInstance().getServer().getWorlds().stream().map(World::getName).forEach(world -> {
+            configuration.addDefault("worlds." + world, configuration.getConfigurationSection("worlds.default"));
+        });
     }
 
     public Configuration getConfiguration() {
