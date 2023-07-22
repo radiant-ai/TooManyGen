@@ -4,6 +4,8 @@ main: fun.milkyway.toomanygen.TooManyGen
 api-version: 1.19
 description: Limits players ability to generate chunks
 author: radiant-ai
+softdepend:
+  - ProtocolLib
 commands:
   toomanygen:
     description: Core command for TooManyGen plugin.

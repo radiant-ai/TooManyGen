@@ -18,9 +18,11 @@ threshold, it will start to punish the players by:
 - decreasing their view distance
 
 ## How do I use it?
-1. Start the server once with the plugin enabled.
-2. Edit the config to your liking.
-3. Restart the server.
+1. Download the plugin and put it in your plugins folder.
+2. **Optionally** download the **ProtocolLib**
+3. Start the server once with the plugin enabled.
+4. Edit the config to your liking.
+5. Restart the server.
 
 ## Configuration
 ```yaml

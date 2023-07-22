@@ -1,5 +1,6 @@
 package fun.milkyway.toomanygen;
 
+import com.comphenix.protocol.ProtocolLibrary;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -42,6 +43,8 @@ public final class TooManyGen extends JavaPlugin {
         command.setExecutor(new TooManyGenCommand());
 
         reloadBstats();
+
+        initProtocollib();
     }
 
     @Override
@@ -93,6 +96,15 @@ public final class TooManyGen extends JavaPlugin {
         }
         getLogger().info("Enabling bStats");
         metrics = new Metrics(this, 19161);
+    }
+
+    private void initProtocollib() {
+        if (getServer().getPluginManager().getPlugin("ProtocolLib") == null) {
+            getLogger().info("Could not find ProtocolLib, add it to your server to remove flickering");
+            return;
+        }
+        ProtocolLibrary.getProtocolManager().addPacketListener(new PacketListener());
+        getLogger().info("Found ProtocolLib, packet listener enabled");
     }
 
     public static TooManyGen getInstance() {

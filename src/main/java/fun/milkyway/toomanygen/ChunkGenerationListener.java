@@ -139,6 +139,7 @@ public class ChunkGenerationListener implements Listener {
             return;
         }
         updateViewDistance(event.getPlayer().getUniqueId(), rates.getOrDefault(event.getPlayer().getUniqueId(), 0), true);
+        FlickerSuppressManager.getInstance().clearFlickerSuppress(event.getPlayer().getUniqueId());
     }
 
     @EventHandler
@@ -252,6 +253,7 @@ public class ChunkGenerationListener implements Listener {
                 player.getViewDistance() < viewDistance && (force || System.currentTimeMillis() - lastViewDistanceUpdate.getOrDefault(uuid, 0L) > 60000L))) {
             player.setViewDistance(viewDistance);
             lastViewDistanceUpdate.put(uuid, System.currentTimeMillis());
+            FlickerSuppressManager.getInstance().suppressFlicker(player.getUniqueId());
             return true;
         }
         return false;
